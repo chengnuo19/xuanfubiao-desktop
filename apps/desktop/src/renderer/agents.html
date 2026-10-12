@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>编码代理设置</title>
+    <!-- tokens.css 必须排在前面 -->
+    <link rel="stylesheet" href="./tokens.css" />
+    <link rel="stylesheet" href="./agents.css" />
+  </head>
+  <body>
+    <!-- 顶部固定状态条 -->
+    <header class="status-bar" id="statusBar">
+      <span class="status-dot" id="statusDot" data-kind="off"></span>
+      <span class="status-text" id="statusText">正在检查监听状态…</span>
+    </header>
+
+    <!-- 可滚动的代理列表容器 -->
+    <main class="page-body">
+      <div class="agent-list" id="agentList"></div>
+      <footer class="footer-note">开关立即生效。安装 / 卸载 hooks 会改写对应代理的配置文件，改之前会先备份。</footer>
+    </main>
+
+    <script type="module" src="./agents.ts"></script>
+  </body>
+</html>

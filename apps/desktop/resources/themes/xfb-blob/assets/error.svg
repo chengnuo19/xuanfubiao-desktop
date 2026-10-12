@@ -1,0 +1,3 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-20 -24 40 44"><g id="shadow-js"><ellipse cx="0" cy="17" rx="11" ry="2.2" fill="#000" opacity=".25"/></g>
+<g id="body-js"><path d="M-14 6 C-14 -8 -8 -15 0 -15 C8 -15 14 -8 14 6 C14 14 8 16 0 16 C-8 16 -14 14 -14 6Z" fill="#ff7b7b"/>
+<ellipse cx="-8" cy="7" rx="3" ry="1.8" fill="#ff8a8a" opacity=".55"/><ellipse cx="8" cy="7" rx="3" ry="1.8" fill="#ff8a8a" opacity=".55"/></g><g id="eyes-js" stroke="#1b1b1f" stroke-width="1.5"><path d="M-7 -1 l4 4 M-3 -1 l-4 4"/><path d="M3 -1 l4 4 M7 -1 l-4 4"/></g></svg>

@@ -1,0 +1,17 @@
+{
+  "name": "xuanfubiao",
+  "version": "0.3.2",
+  "license": "AGPL-3.0-only",
+  "private": true,
+  "description": "悬浮标 — 桌面悬浮 AI 宠物，快速把问题送进 ChatGPT / Gemini",
+  "scripts": {
+    "dev": "pnpm --filter @xfb/desktop dev",
+    "build": "pnpm -r build",
+    "dist": "pnpm --filter @xfb/desktop run dist",
+    "typecheck": "pnpm -r typecheck"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@11.5.0"
+}

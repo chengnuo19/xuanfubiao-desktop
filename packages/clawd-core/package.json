@@ -1,0 +1,14 @@
+{
+  "name": "@xfb/clawd-core",
+  "version": "1.2.0",
+  "license": "AGPL-3.0-only",
+  "private": true,
+  "description": "clawd-on-desk 的代理接入层，原样复制，见 UPSTREAM.md",
+  "type": "commonjs",
+  "dependencies": {
+    "dom-serializer": "^2.0.0",
+    "htmlparser2": "^10.0.0",
+    "jsonc-parser": "^3.3.1",
+    "koffi": "2.16.3"
+  }
+}

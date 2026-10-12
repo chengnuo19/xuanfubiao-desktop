@@ -1,0 +1,9 @@
+{
+  "id": "xuanfubiao",
+  "name": "悬浮标",
+  "version": "0.3.0",
+  "minAppVersion": "1.4.0",
+  "description": "选中一段文字，发给已登录的 ChatGPT 或 Gemini，回答直接插在下面。借用本机悬浮标的会话，不需要 API key。",
+  "author": "悬浮标",
+  "isDesktopOnly": true
+}

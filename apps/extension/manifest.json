@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "悬浮标 · 网页端",
+  "version": "0.3.0",
+  "minimum_chrome_version": "116",
+  "description": "向 ChatGPT / Gemini 投递消息，并用网页浮栏快速打开可置顶的 Web 应用。",
+  "permissions": ["tabs", "storage", "alarms", "scripting", "contextMenus"],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "service_worker": "src/background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://chat.openai.com/*",
+        "https://gemini.google.com/*"
+      ],
+      "js": ["src/adapters.js", "src/content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["src/floatbar-model.js", "src/floatbar.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "options_ui": {
+    "page": "src/options.html",
+    "open_in_tab": false
+  },
+  "action": {
+    "default_title": "悬浮标"
+  }
+}

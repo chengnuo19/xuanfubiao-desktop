@@ -1,0 +1,62 @@
+# 打包配置。
+#
+# 最要紧的是 extraResources：helper 脚本和托盘图标必须随包分发，
+# 漏了程序会直接瘫（投递不工作、托盘看不见），而且 dev 模式完全正常，
+# 只有装完才暴露。
+
+appId: com.xuanfubiao.desktop
+# 用 ASCII 作产品名：它会进安装目录和 userData 路径，中文在某些工具链下会出事。
+# 给用户看的中文名放在快捷方式上。
+productName: XuanFuBiao
+
+directories:
+  output: release
+  buildResources: build
+
+files:
+  - out/**/*
+  - package.json
+
+# 代码里已经写好 app.isPackaged -> process.resourcesPath 的分支，
+# 这里的 to 就是那个分支要找的位置。
+extraResources:
+  - from: ../../THIRD_PARTY_NOTICES.md
+    to: THIRD_PARTY_NOTICES.md
+  - from: resources/win32-helper.ps1
+    to: win32-helper.ps1
+  - from: resources/tray.png
+    to: tray.png
+  - from: resources/tray@2x.png
+    to: tray@2x.png
+  # 自带的原创角色主题，首次启动时装进 userData/themes（见 theme.ts 的 installBundledThemes）。
+  - from: resources/themes
+    to: themes
+  # clawd-on-desk 的代理接入层（hook 脚本、宿主核心、koffi）。必须在 asar 外：
+  # hook 脚本由各代理用系统的 node 启动，koffi 的 .node 也不能从 asar 加载。
+  # 这个目录由 tools/stage-clawd-core.mjs 生成（dist 脚本会先跑它），依赖是平铺的真文件。
+  - from: .staging/clawd-core
+    to: clawd-core
+  # extraResources 会跳过路径里带 node_modules 的文件（加 filter 也没用），
+  # 只能把依赖目录本身当 from 单独拷一次。漏了的话装出来缺 koffi 等依赖，
+  # 而开发版完全正常（走的是 workspace 里的依赖），只有装完才暴露。
+  - from: .staging/clawd-core/node_modules
+    to: clawd-core/node_modules
+
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+  # 悬浮标是个常驻小工具，没有签名证书；这里不配签名，
+  # 首次运行 SmartScreen 可能拦一下，属预期。
+  artifactName: ${productName}-${version}-setup.${ext}
+
+nsis:
+  # 不用一键安装：让用户看得见装到哪、能自己改目录。
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: 悬浮标
+  # 卸载时清掉自启项，别在注册表里留垃圾。
+  deleteAppDataOnUninstall: false

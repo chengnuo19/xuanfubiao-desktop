@@ -1,0 +1,9 @@
+{
+  "name": "@xfb/extension",
+  "version": "0.3.0",
+  "license": "AGPL-3.0-only",
+  "private": true,
+  "scripts": {
+    "test": "node --test src/*.test.cjs"
+  }
+}

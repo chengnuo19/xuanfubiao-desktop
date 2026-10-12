@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "name": "团子",
+  "version": "1.0.0",
+  "author": "悬浮标",
+  "description": "悬浮标自带的原创角色。",
+  "license": "AGPL-3.0-only",
+  "viewBox": {
+    "x": -20,
+    "y": -24,
+    "width": 40,
+    "height": 44
+  },
+  "eyeTracking": {
+    "enabled": true,
+    "states": [
+      "idle",
+      "working"
+    ],
+    "ids": {
+      "eyes": "eyes-js",
+      "body": "body-js",
+      "shadow": "shadow-js"
+    }
+  },
+  "sleepSequence": {
+    "mode": "full"
+  },
+  "timings": {
+    "mouseSleepTimeout": 60000,
+    "yawnDuration": 3000,
+    "wakeDuration": 1500
+  },
+  "reactions": {
+    "double": {
+      "file": "wink.svg",
+      "duration": 1500
+    }
+  },
+  "states": {
+    "idle": [
+      "idle.svg"
+    ],
+    "thinking": [
+      "thinking.svg"
+    ],
+    "working": [
+      "working.svg"
+    ],
+    "juggling": [
+      "juggling.svg"
+    ],
+    "attention": [
+      "attention.svg"
+    ],
+    "notification": [
+      "notification.svg"
+    ],
+    "error": [
+      "error.svg"
+    ],
+    "sleeping": [
+      "sleeping.svg"
+    ],
+    "yawning": [
+      "yawning.svg"
+    ],
+    "dozing": {
+      "fallbackTo": "sleeping"
+    },
+    "collapsing": {
+      "fallbackTo": "sleeping"
+    }
+  }
+}

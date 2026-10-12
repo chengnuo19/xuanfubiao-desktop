@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>悬浮标 · 临时篮子</title>
+    <link rel="stylesheet" href="./tokens.css" />
+    <link rel="stylesheet" href="./basket.css" />
+  </head>
+  <body>
+    <!-- 图标取自 Tabler Icons，路径由 tools/sync-icons.mjs 按 data-tabler 填入，别手改。 -->
+    <svg class="icon-defs" aria-hidden="true">
+      <symbol id="i-tray" data-tabler="basket" viewBox="0 0 24 24"><path d="M10 14a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M5.001 8h13.999a2 2 0 0 1 1.977 2.304l-1.255 7.152a3 3 0 0 1 -2.966 2.544h-9.512a3 3 0 0 1 -2.965 -2.544l-1.255 -7.152a2 2 0 0 1 1.977 -2.304" /><path d="M17 10l-2 -6" /><path d="M7 10l2 -6" /></symbol>
+      <symbol id="i-search" data-tabler="search" viewBox="0 0 24 24"><path d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></symbol>
+      <symbol id="i-inbox" data-tabler="inbox" viewBox="0 0 24 24"><path d="M4 6a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2l0 -12" /><path d="M4 13h3l3 3h4l3 -3h3" /></symbol>
+      <symbol id="i-file" data-tabler="file" viewBox="0 0 24 24"><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /></symbol>
+      <symbol id="i-folder" data-tabler="folder" viewBox="0 0 24 24"><path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" /></symbol>
+      <symbol id="i-image" data-tabler="photo" viewBox="0 0 24 24"><path d="M15 8h.01" /><path d="M3 6a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v12a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3v-12" /><path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l5 5" /><path d="M14 14l1 -1c.928 -.893 2.072 -.893 3 0l3 3" /></symbol>
+      <symbol id="i-link" data-tabler="link" viewBox="0 0 24 24"><path d="M9 15l6 -6" /><path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" /><path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" /></symbol>
+      <symbol id="i-text" data-tabler="align-left" viewBox="0 0 24 24"><path d="M4 6l16 0" /><path d="M4 12l10 0" /><path d="M4 18l14 0" /></symbol>
+      <symbol id="i-settings" data-tabler="settings" viewBox="0 0 24 24"><path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065" /><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /></symbol>
+      <symbol id="i-plus" data-tabler="plus" viewBox="0 0 24 24"><path d="M12 5l0 14" /><path d="M5 12l14 0" /></symbol>
+      <symbol id="i-broom" data-tabler="eraser" viewBox="0 0 24 24"><path d="M19 20h-10.5l-4.21 -4.3a1 1 0 0 1 0 -1.41l10 -10a1 1 0 0 1 1.41 0l5 5a1 1 0 0 1 0 1.41l-9.2 9.3" /><path d="M18 13.3l-6.3 -6.3" /></symbol>
+      <symbol id="i-more" data-tabler="dots" viewBox="0 0 24 24"><path d="M4 12a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M11 12a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M18 12a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /></symbol>
+      <symbol id="i-eye" data-tabler="eye" viewBox="0 0 24 24"><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></symbol>
+      <symbol id="i-copy" data-tabler="copy" viewBox="0 0 24 24"><path d="M7 9.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667l0 -8.666" /><path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1" /></symbol>
+      <symbol id="i-edit" data-tabler="pencil" viewBox="0 0 24 24"><path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" /><path d="M13.5 6.5l4 4" /></symbol>
+      <symbol id="i-trash" data-tabler="trash" viewBox="0 0 24 24"><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></symbol>
+      <symbol id="i-external" data-tabler="external-link" viewBox="0 0 24 24"><path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" /><path d="M11 13l9 -9" /><path d="M15 4h5v5" /></symbol>
+      <symbol id="i-chevron" data-tabler="chevron-right" viewBox="0 0 24 24"><path d="M9 6l6 6l-6 6" /></symbol>
+      <symbol id="i-check" data-tabler="check" viewBox="0 0 24 24"><path d="M5 12l5 5l10 -10" /></symbol>
+      <symbol id="i-alert" data-tabler="alert-triangle" viewBox="0 0 24 24"><path d="M12 9v4" /><path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0" /><path d="M12 16h.01" /></symbol>
+      <symbol id="i-x" data-tabler="x" viewBox="0 0 24 24"><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></symbol>
+      <symbol id="i-expand" data-tabler="arrows-diagonal" viewBox="0 0 24 24"><path d="M16 4l4 0l0 4" /><path d="M14 10l6 -6" /><path d="M8 20l-4 0l0 -4" /><path d="M4 20l6 -6" /></symbol>
+      <symbol id="i-collapse" data-tabler="arrows-diagonal-minimize-2" viewBox="0 0 24 24"><path d="M18 10h-4v-4" /><path d="M20 4l-6 6" /><path d="M6 14h4v4" /><path d="M10 14l-6 6" /></symbol>
+      <symbol id="i-download" data-tabler="download" viewBox="0 0 24 24"><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" /><path d="M7 11l5 5l5 -5" /><path d="M12 4l0 12" /></symbol>
+    </svg>
+
+    <main class="app" id="basket" data-mode="full" aria-label="悬浮标临时篮子">
+      <header class="topbar">
+        <div class="brand"><span class="brand-mark"><svg class="icon"><use href="#i-tray"/></svg></span><strong>悬浮标</strong></div>
+        <label class="search-wrap" for="searchInput"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg><input id="searchInput" type="search" placeholder="搜索临时篮子" autocomplete="off" /><kbd>Ctrl K</kbd></label>
+        <div class="window-actions">
+          <button class="icon-button" id="collapseButton" type="button" title="收起为投放架" aria-label="收起为投放架"><svg class="icon"><use href="#i-collapse"/></svg></button>
+          <button class="icon-button" id="settingsButton" type="button" title="设置" aria-label="打开设置" aria-expanded="false"><svg class="icon"><use href="#i-settings"/></svg></button>
+          <button class="icon-button close-button" id="closeButton" type="button" title="关闭" aria-label="关闭"><svg class="icon"><use href="#i-x"/></svg></button>
+        </div>
+      </header>
+
+      <section class="shelf" id="shelf" aria-label="临时篮子投放架">
+        <header class="shelf-head">
+          <span class="brand-mark"><svg class="icon"><use href="#i-tray"/></svg></span><strong>临时篮子</strong><span class="shelf-count" id="shelfCount">0</span>
+          <div class="shelf-actions">
+            <button class="icon-button" id="expandButton" type="button" title="展开完整篮子" aria-label="展开完整篮子"><svg class="icon"><use href="#i-expand"/></svg></button>
+            <button class="icon-button close-button" id="shelfCloseButton" type="button" title="关闭" aria-label="关闭"><svg class="icon"><use href="#i-x"/></svg></button>
+          </div>
+        </header>
+        <div class="shelf-drop" id="shelfDrop">
+          <span class="shelf-drop-icon"><svg class="icon"><use href="#i-download"/></svg></span>
+          <strong id="shelfDropTitle">拖到这里暂存</strong>
+          <span id="shelfDropHint">文件、图片、文本、链接都可以</span>
+        </div>
+        <div class="shelf-list-head" id="shelfListHead" hidden><span>最近放入</span><span class="drag-all" id="shelfDragAll" draggable="true" title="按住拖到桌面或其他程序" hidden></span></div>
+        <div class="shelf-list" id="shelfList" role="list" aria-label="最近放入"></div>
+        <button class="shelf-more" id="shelfMore" type="button" hidden></button>
+      </section>
+
+      <nav class="sidebar" aria-label="临时篮子导航">
+        <div><div class="nav-label">工作区</div><button class="nav-item active" type="button" aria-current="page"><svg class="icon"><use href="#i-inbox"/></svg><span>临时篮子</span><span class="nav-count" id="navCount">0</span></button></div>
+        <div><div class="nav-label">系统</div><button class="nav-item" id="sidebarSettingsButton" type="button"><svg class="icon"><use href="#i-settings"/></svg><span>设置</span></button></div>
+        <div class="storage-summary"><div><span>已用空间</span><span id="storageText">0 B / 1 GB</span></div><div class="storage-track" aria-hidden="true"><span id="storageBar"></span></div></div>
+      </nav>
+
+      <section class="content" aria-label="临时篮子内容">
+        <header class="content-head">
+          <div><h1>临时篮子</h1><p>暂存文件、图片、文本与链接，需要时随手取用。</p></div>
+          <div class="head-actions"><button class="button subtle" id="clearButton" type="button"><svg class="icon"><use href="#i-broom"/></svg>清空</button><button class="button primary" id="addButton" type="button"><svg class="icon"><use href="#i-plus"/></svg>添加内容</button></div>
+        </header>
+
+        <div class="toolbar">
+          <div class="filters" role="group" aria-label="筛选内容类型">
+            <button class="filter active" type="button" data-filter="all" aria-pressed="true">全部</button><button class="filter" type="button" data-filter="file" aria-pressed="false">文件</button><button class="filter" type="button" data-filter="image" aria-pressed="false">图片</button><button class="filter" type="button" data-filter="text" aria-pressed="false">文本</button><button class="filter" type="button" data-filter="url" aria-pressed="false">链接</button>
+          </div>
+          <div class="toolbar-end"><span class="drag-all" id="dragAllButton" draggable="true" title="按住拖到桌面或其他程序" hidden><svg class="icon"><use href="#i-download"/></svg>拖出全部</span><button class="sort-button" id="sortButton" type="button" aria-label="切换加入时间排序">加入时间<svg class="icon"><use href="#i-chevron"/></svg></button></div>
+        </div>
+
+        <div class="capacity-notice" id="capacityNotice" role="alert" hidden><svg class="icon"><use href="#i-alert"/></svg><span id="capacityMessage"></span><button id="capacitySettingsButton" type="button">调整容量</button></div>
+        <div class="list-area" id="listArea" tabindex="-1">
+          <div class="list-head"><span>名称</span><span>类型</span><span>大小</span><span>加入时间</span><span></span></div>
+          <div id="items" role="listbox" aria-label="篮子内容"></div>
+          <section class="empty" id="empty" role="status"><svg class="icon"><use href="#i-inbox"/></svg><h2>临时篮子为空</h2><p>将内容拖进窗口，或者从本机选择文件。</p><button class="button primary" id="emptyAddButton" type="button"><svg class="icon"><use href="#i-plus"/></svg>添加内容</button></section>
+        </div>
+        <footer class="status-strip"><span id="summary">0 项 · 0 B</span><div class="status-actions" id="statusActions" hidden><button type="button" id="copyButton">复制</button><button type="button" id="renameButton">重命名</button><button class="danger-text" type="button" id="deleteButton">移除</button></div></footer>
+      </section>
+
+      <aside class="inspector" aria-label="所选内容预览与属性">
+        <header><strong>预览与属性</strong><button class="icon-button" id="inspectorMore" type="button" aria-label="更多操作"><svg class="icon"><use href="#i-more"/></svg></button></header>
+        <div class="inspector-body" id="inspectorBody"><div class="inspector-empty">选择一个项目查看详情</div></div>
+        <footer><button class="button primary" id="openButton" type="button" disabled><svg class="icon"><use href="#i-external"/></svg>打开项目</button><button class="button" id="previewButton" type="button" disabled><svg class="icon"><use href="#i-eye"/></svg>完整预览</button></footer>
+      </aside>
+
+      <section class="settings-panel" id="settingsPopover" aria-label="临时篮子设置" hidden>
+        <strong class="settings-title">临时篮子设置</strong>
+        <label class="setting-row"><span><strong>自动清理</strong><small>按加入时间清理旧内容</small></span><select id="retentionSelect" aria-label="自动清理周期"><option value="0">关闭</option><option value="1">超过 1 天</option><option value="7">超过 7 天</option><option value="30">超过 30 天</option></select></label>
+        <label class="setting-row"><span><strong>容量上限</strong><small>达到上限后停止新增</small></span><select id="capacitySelect" aria-label="容量上限"><option value="100">100 MB</option><option value="500">500 MB</option><option value="1024">1 GB</option><option value="5120">5 GB</option><option value="0">不限制</option></select></label>
+        <label class="setting-row"><span><strong>拖出后移出</strong><small>拖到别处后从篮子移除，6 秒内可撤销</small></span><input class="switch" id="dragOutSwitch" type="checkbox" role="switch" aria-label="拖出后移出篮子" /></label>
+        <label class="setting-row"><span><strong>摇动手势唤出</strong><small>拖动内容时快速左右摇晃鼠标</small></span><input class="switch" id="shakeSwitch" type="checkbox" role="switch" aria-label="摇动手势唤出" /></label>
+        <label class="setting-row" id="sensitivityRow"><span><strong>摇动灵敏度</strong><small>防误触门槛与位移要求</small></span><select id="sensitivitySelect" aria-label="摇动灵敏度"><option value="low">迟钝（防误触）</option><option value="medium">适中（推荐）</option><option value="high">灵敏</option></select></label>
+        <label class="setting-row" id="suppressFullscreenRow"><span><strong>游戏中自动静音</strong><small>全屏应用或游戏中不触发</small></span><input class="switch" id="suppressFullscreenSwitch" type="checkbox" role="switch" aria-label="游戏中自动静音" /></label>
+        <div class="setting-row static"><span><strong>重复内容</strong><small>按内容摘要识别</small></span><span>跳过并提示</span></div>
+        <div class="settings-foot" id="usageText">正在计算占用空间…</div>
+      </section>
+
+      <div class="context-menu" id="contextMenu" role="menu" hidden>
+        <button type="button" role="menuitem" data-action="preview"><svg class="icon"><use href="#i-eye"/></svg>打开预览<span>Enter</span></button><button type="button" role="menuitem" data-action="open"><svg class="icon"><use href="#i-external"/></svg>打开项目</button><button type="button" role="menuitem" data-action="copy"><svg class="icon"><use href="#i-copy"/></svg>复制<span>Ctrl C</span></button><button type="button" role="menuitem" data-action="rename"><svg class="icon"><use href="#i-edit"/></svg>重命名<span>F2</span></button><div class="menu-separator"></div><button class="danger" type="button" role="menuitem" data-action="delete"><svg class="icon"><use href="#i-trash"/></svg>移出篮子<span>Del</span></button>
+      </div>
+
+      <div class="drop-mask" id="dropMask" aria-hidden="true"><svg class="icon"><use href="#i-inbox"/></svg><strong>松手放进临时篮子</strong></div>
+      <div class="toast" id="toast" role="status" hidden><svg class="icon"><use href="#i-check"/></svg><span id="toastText"></span><button class="toast-action" id="toastAction" type="button" hidden>撤销</button></div>
+      <input id="fileInput" type="file" multiple hidden />
+
+      <section class="modal" id="previewModal" hidden aria-modal="true" role="dialog" aria-labelledby="previewTitle"><div class="modal-card preview-card"><header><strong id="previewTitle"></strong><button class="icon-button" id="previewClose" type="button" aria-label="关闭预览"><svg class="icon"><use href="#i-x"/></svg></button></header><div class="preview-content" id="previewContent"></div><p class="preview-meta" id="previewMeta"></p></div></section>
+      <section class="modal" id="renameModal" hidden aria-modal="true" role="dialog" aria-labelledby="renameTitle"><form class="modal-card rename-card" id="renameForm"><header><strong id="renameTitle">重命名</strong><button class="icon-button" id="renameClose" type="button" aria-label="取消重命名"><svg class="icon"><use href="#i-x"/></svg></button></header><label for="renameInput">新名称</label><input id="renameInput" type="text" maxlength="180" autocomplete="off" /><p id="renameExtension"></p><div class="modal-actions"><button class="button" id="renameCancel" type="button">取消</button><button class="button primary" type="submit">保存</button></div></form></section>
+    </main>
+    <script type="module" src="./basket.ts"></script>
+  </body>
+</html>
